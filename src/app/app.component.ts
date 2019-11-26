@@ -3,6 +3,7 @@ import { NzCardModule } from 'ng-zorro-antd/card'
 import { NzCarouselModule } from 'ng-zorro-antd/carousel'
 import { NzTabsModule } from 'ng-zorro-antd/tabs'
 import { NzBackTopComponent } from 'ng-zorro-antd/back-top'
+import { NzIconModule } from 'ng-zorro-antd/icon'
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,12 +11,11 @@ import { NzBackTopComponent } from 'ng-zorro-antd/back-top'
 })
 export class AppComponent {
   notify(): void {
-    console.log('notify');
+    console.log('notify')
   }
-  isCollapsed = false;
+  isCollapsed = false
 
   toggleCollapsed(): void {
-    this.isCollapsed = !this.isCollapsed;
+    this.isCollapsed = !this.isCollapsed
   }
 }
-

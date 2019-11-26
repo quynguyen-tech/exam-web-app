@@ -1,8 +1,14 @@
-<main>
+<main class="mt-5 pt-5">
   <router-outlet></router-outlet>
 </main>
-<nz-back-top [nzTemplate]="tpl" [nzVisibilityHeight]="100" (nzOnClick)="notify()">
+<nz-back-top
+  [nzTemplate]="tpl"
+  [nzVisibilityHeight]="100"
+  (nzOnClick)="notify()"
+>
   <ng-template #tpl>
-    <div class="ant-back-top-inner">^</div>
+    <div class="ant-back-top-inner">
+      <i nz-icon nzType="up" nzTheme="outline" style="font-size: 16px;"></i>
+    </div>
   </ng-template>
 </nz-back-top>
