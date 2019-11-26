@@ -44,7 +44,7 @@ export class ChangepasswordComponent implements OnInit {
     })
   }
 
-  resetPassword(value, email: string) {
+  resetPassword(value) {
     this.email = value.email
     // email = this.user.email
     // email = value.email

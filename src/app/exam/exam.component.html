@@ -42,9 +42,7 @@
           (ngModelChange)="onChoose(item.Id, list.Id)"
           [(ngModel)]="list._answerId"
         >
-          <label nz-radio [nzValue]="item.Id" [ngStyle]="style">{{
-            item.Text
-          }}</label>
+          <label nz-radio [nzValue]="item.Id">{{ item.Text }}</label>
         </nz-radio-group>
       </div>
     </div>
