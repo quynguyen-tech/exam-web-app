@@ -45,7 +45,6 @@ export class AuthService {
   }
 
   updateUserData(user) {
-    console.log('-===-----------------', user)
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
     )
@@ -53,7 +52,6 @@ export class AuthService {
       .doc(`/users/${user.uid}`)
       .get()
       .then(docSnapshot => {
-        console.log('----=-=-=-=-=-=-=-=-=- ', docSnapshot)
         if (docSnapshot.exists) {
           return
         } else {
@@ -64,7 +62,7 @@ export class AuthService {
             photoURL: user.photoURL
           }
 
-          return userRef.set(data, { merge: true })
+          return userRef.set(Object.assign({}, data), { merge: true })
         }
       })
   }

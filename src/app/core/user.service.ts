@@ -43,9 +43,7 @@ export class UserService {
       studentId: value.studentId || user.studentId,
       result
     }
-    console.log('data', data)
-
-    return userRef.set(data, { merge: true })
+    return userRef.set(Object.assign({}, data), { merge: true })
   }
   getUserProfile(data) {
     return this.afs
