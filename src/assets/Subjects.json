@@ -4,14 +4,14 @@
     "Name": "Lập trình Android nâng cao",
     "Logo": "../../assets/images/ADAV.jpg",
     "start_time": "26/11/2019 06:00",
-    "end_time": "26/11/2019 12:30"
+    "end_time": "26/11/2019 20:30"
   },
   {
     "Id": "ADBS",
     "Name": "Lập trình Android cơ bản",
     "Logo": "../../assets/images/ADBS.jpg",
-    "start_time": "19/11/2019 09:30",
-    "end_time": "19/11/2019 12:30"
+    "start_time": "26/11/2019 09:30",
+    "end_time": "26/11/2019 17:30"
   },
   {
     "Id": "ADTE",

@@ -37,7 +37,7 @@ export class ChangepasswordComponent implements OnInit {
     this.router.data.subscribe(async routeData => {
       let data = routeData['data']
       if (data) {
-        this.user = await this.userService.getUserProfile(data.uid)
+        this.user = await this.userService.getUserProfile(data)
       } else {
         console.log('---errrr')
       }

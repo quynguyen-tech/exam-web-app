@@ -31,14 +31,14 @@ export class UserComponent implements OnInit {
     this.route.data.subscribe(async routeData => {
       let data = routeData['data']
       if (data) {
-        this.user = await this.getProfile(data.uid)
-        console.log(this.user)
+        this.user = await this.getProfile(data)
+        console.log('-s--sd-adardata', data)
       }
     })
   }
 
-  async getProfile(uid) {
-    return await this.userService.getUserProfile(uid)
+  async getProfile(data) {
+    return await this.userService.getUserProfile(data)
   }
 
   createForm() {
@@ -51,7 +51,7 @@ export class UserComponent implements OnInit {
   save(value) {
     this.userService.updateCurrentUser(this.user, value).then(
       async res => {
-        this.user = await this.getProfile(localStorage.getItem('uid'))
+        this.user = await this.getProfile(this.user)
       },
       err => console.log(err, 'loi')
     )

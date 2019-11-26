@@ -32,15 +32,15 @@ export class UpdateComponent implements OnInit {
     this.router.data.subscribe(async routeData => {
       let data = routeData['data']
       if (data) {
-        this.user = await this.getProfile(data.uid)
+        this.user = await this.getProfile(data)
         console.log(this.user)
         this.createForm(this.user)
       }
     })
   }
 
-  async getProfile(uid) {
-    return await this.userService.getUserProfile(uid)
+  async getProfile(data) {
+    return await this.userService.getUserProfile(data)
   }
 
   createForm(user) {

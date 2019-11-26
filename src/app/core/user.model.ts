@@ -4,14 +4,12 @@ export class User {
   photoURL?: string
   displayName?: string
   studentId?: string
-  // provider?: string
-
+  result?: any
 
   constructor() {
     this.uid = ''
     this.email = ''
     this.photoURL = ''
     this.displayName = ''
-    // this.provider = ''
   }
 }

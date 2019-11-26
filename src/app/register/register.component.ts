@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { AuthService } from '../core/auth.service'
 import { Router, Params } from '@angular/router'
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
+import { Location } from '@angular/common'
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -35,14 +36,11 @@ export class RegisterComponent implements OnInit {
     return {}
   }
 
-  getCaptcha(e: MouseEvent): void {
-    e.preventDefault()
-  }
-
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private location: Location
   ) {
     this.createFrom()
   }
@@ -53,12 +51,24 @@ export class RegisterComponent implements OnInit {
     })
   }
 
+  logout() {
+    this.authService.doLogout().then(
+      res => {
+        console.log(res)
+        this.router.navigate(['/login'])
+      },
+      error => {
+        console.log('Logout error', error)
+      }
+    )
+  }
+
   tryRegister(value) {
     this.authService.doRegister(value).then(
       res => {
-        console.log(res)
         this.errorMessage = ''
         this.successMessage = 'Your account has been created'
+        this.logout()
       },
       err => {
         console.log(err)

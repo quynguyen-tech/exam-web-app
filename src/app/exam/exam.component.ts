@@ -29,7 +29,8 @@ export class ExamComponent implements OnInit {
   result = {
     mark: 0,
     trueAnswer: 0,
-    answered: 0
+    answered: 0,
+    subject: ''
   }
 
   constructor(
@@ -88,7 +89,7 @@ export class ExamComponent implements OnInit {
     this.router.data.subscribe(async routerData => {
       let data = routerData['data']
       if (data) {
-        this.user = await this.userService.getUserProfile(data.uid)
+        this.user = await this.userService.getUserProfile(data)
       } else {
         console.log('=======errr')
       }
@@ -98,6 +99,7 @@ export class ExamComponent implements OnInit {
     this.router.paramMap.subscribe(params => {
       const id = params.get('subjectId')
       this.subjectName = id
+      this.result.subject = this.subjectName
     })
 
     this.getQuestions(this.subjectName).subscribe(data => {
@@ -128,7 +130,6 @@ export class ExamComponent implements OnInit {
   }
 
   onChoose(answerId, questionId) {
-    console.log('-----===-=-=-=-==', answerId)
     const current = this.list.find(question => question.Id === questionId)
     if (!current._answerId) {
       this.result.answered += 1
@@ -145,6 +146,11 @@ export class ExamComponent implements OnInit {
         }
       }
     })
-    this.showModal()
+    this.userService.updateCurrentUser(this.user, { result: this.result }).then(
+      async res => {
+        this.showModal()
+      },
+      err => console.log(err, 'loi')
+    )
   }
 }
