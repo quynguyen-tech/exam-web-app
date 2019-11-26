@@ -33,14 +33,17 @@ export class UserService {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
     )
-    let result = user.result || []
-    result.push(value.result)
+    let result = user.result ? user.result : []
+    if (value.result) {
+      result.push(value.result)
+    }
+
     const data: User = {
       uid: user.uid,
       email: user.email,
-      displayName: value.name || user.displayName,
-      photoURL: value.photoURL || user.photoURL,
-      studentId: value.studentId || user.studentId,
+      displayName: value.name ? value.name : user.displayName,
+      photoURL: value.photoURL ? value.photoURL : user.photoURL,
+      studentId: value.studentId ? value.studentId : user.studentId,
       result
     }
     return userRef.set(Object.assign({}, data), { merge: true })
