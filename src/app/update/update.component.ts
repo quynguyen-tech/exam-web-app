@@ -1,11 +1,10 @@
-
-import { Component, OnInit } from '@angular/core';
-import { UserService } from '../core/user.service';
-import { AuthService } from '../core/auth.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { User } from '../core/user.model';
+import { Component, OnInit } from '@angular/core'
+import { UserService } from '../core/user.service'
+import { AuthService } from '../core/auth.service'
+import { ActivatedRoute, Router } from '@angular/router'
+import { Location } from '@angular/common'
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
+import { User } from '../core/user.model'
 
 @Component({
   selector: 'app-update',
@@ -13,7 +12,6 @@ import { User } from '../core/user.model';
   styleUrls: ['./update.component.scss']
 })
 export class UpdateComponent implements OnInit {
-
   user: User = new User()
   profileForm = new FormGroup({
     studentId: new FormControl(),
@@ -23,20 +21,19 @@ export class UpdateComponent implements OnInit {
   constructor(
     public userService: UserService,
     public authService: AuthService,
-    private route: ActivatedRoute,
+    private router: ActivatedRoute,
+    private route: Router,
     private location: Location,
-    private fb: FormBuilder,
-  ) {
-
-  }
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
-    console.log(this.route.data);
-    this.route.data.subscribe(async routeData => {
+    console.log(this.router.data)
+    this.router.data.subscribe(async routeData => {
       let data = routeData['data']
       if (data) {
         this.user = await this.getProfile(data.uid)
-        console.log(this.user);
+        console.log(this.user)
         this.createForm(this.user)
       }
     })
@@ -54,19 +51,23 @@ export class UpdateComponent implements OnInit {
   }
 
   save(value) {
-    this.userService.updateCurrentUser(this.user, value)
-      .then(async res => {
+    this.userService.updateCurrentUser(this.user, value).then(
+      async res => {
         console.log(res, 'thanh cong')
-        window.location.href = '/user'
-      }, err => console.log(err, 'loi'))
+        this.route.navigate(['/user'])
+      },
+      err => console.log(err, 'loi')
+    )
   }
 
   logout() {
-    this.authService.doLogout()
-      .then((res) => {
-        this.location.back();
-      }, (error) => {
-        console.log("Logout error", error);
-      });
+    this.authService.doLogout().then(
+      res => {
+        this.location.back()
+      },
+      error => {
+        console.log('Logout error', error)
+      }
+    )
   }
 }
